@@ -1,0 +1,69 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <localRepository>${user.home}/.m2/repository</localRepository>
+
+    <servers>
+        <server>
+            <id>nexus</id>
+            <username>admin</username>
+            <password>Indianspree23</password>
+        </server>
+    </servers>
+
+    <mirrors>
+        <mirror> <!--Send all requests to the public group -->
+            <id>nexus</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://spreezy.in:6832/repository/maven-public/</url>
+        </mirror>
+    </mirrors>
+    <activeProfiles>
+        <!--make the profile active all the time -->
+        <activeProfile>nexus</activeProfile>
+    </activeProfiles>
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <!--Override the repository (and pluginRepository) "central" from the Maven Super POM
+                to activate snapshots for both! -->
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>http://spreezy.in:6832/repository/maven-central/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>docker-registry</id>
+                    <url>spreezy.in:6836</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>http://spreezy.in:6832/repository/maven-central/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+<!--    <pluginGroups>-->
+<!--        <pluginGroup>org.sonatype.plugins</pluginGroup>-->
+<!--    </pluginGroups>-->
+</settings>
